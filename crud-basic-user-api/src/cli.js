@@ -10,14 +10,14 @@ const API_URL = 'http://localhost:4000';
 
 function showMenu() {
   console.clear();
-  console.log('=== USER MANAGEMENT SYSTEM ===');
+  console.log('=== ============== ========USER MANAGEMENT SYSTEM  == =======================');
   console.log('1. Xem danh sách người dùng');
   console.log('2. Tìm kiếm một người theo tên');
   console.log('3. Thêm người dùng mới');
   console.log('4. Cập nhật thông tin người dùng');
   console.log('5. Xóa người dùng');
   console.log('0. Thoát');
-  console.log('===========================');
+  console.log('=============================================================================================================');
 }
 
 async function getAllUsers() {

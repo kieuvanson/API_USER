@@ -1,7 +1,7 @@
 // controllers/userController.js
 const userModel = require('../models/User');
 
-// Lấy tất cả người dùng (hỗ trợ query ?name= để tìm theo tên)
+
 const getAllUsers = async (req, res) => {
   try {
     const { name } = req.query;
@@ -23,14 +23,14 @@ const getUserById = async (req, res) => {
   }
 };
 
-// Tìm 1 người theo tên (trả về kết quả đầu tiên)
+// Tìm tất cả người theo tên 
 const getUserByName = async (req, res) => {
   try {
     const { name } = req.query;
     if (!name) return res.status(400).json({ message: 'Query param "name" is required' });
-    const user = await userModel.getUserByName(name);
-    if (!user) return res.status(404).json({ message: 'User not found' });
-    res.json(user);
+    const users = await userModel.getUserByName(name);
+    if (!users || users.length === 0) return res.status(404).json({ message: 'User not found' });
+    res.json(users);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
