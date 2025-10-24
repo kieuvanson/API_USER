@@ -1,0 +1,28 @@
+{
+  "name": "crud-basic-user-api",
+  "version": "1.0.0",
+  "description": "Basic CRUD API for user management",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "dependencies": {
+    "axios": "^1.12.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.6.1",
+    "express": "^4.18.2",
+    "mongoose": "^7.0.0",
+    "pg": "^8.16.3",
+    "pg-hstore": "^2.3.4"
+  },
+  "devDependencies": {
+    "eslint": "^8.36.0",
+    "nodemon": "^2.0.22",
+    "prettier": "^2.8.7"
+  }
+}
