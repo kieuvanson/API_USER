@@ -1,4 +1,4 @@
-// controllers/userController.js
+
 const userModel = require('../models/User');
 
 
@@ -12,18 +12,8 @@ const getAllUsers = async (req, res) => {
   }
 };
 
-// Lấy người dùng theo ID
-const getUserById = async (req, res) => {
-  try {
-    const user = await userModel.getUserById(req.params.id);
-    if (!user) return res.status(404).json({ message: 'User not found' });
-    res.json(user);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-};
 
-// Tìm tất cả người theo tên 
+
 const getUserByName = async (req, res) => {
   try {
     const { name } = req.query;
@@ -35,45 +25,69 @@ const getUserByName = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
-
-// Tạo người dùng mới
 const createUser = async (req, res) => {
   try {
     const { name, email, phone, avatar } = req.body;
+    const checkemailduplicate =await userModel.checkemailduplicate(email);
+    if(checkemailduplicate){
+       return res.status(400).json({message:"email already exists"});
+    }
+    else{
     const newUser = await userModel.createUser(name, email, phone, avatar);
     res.status(201).json(newUser);
-  } catch (err) {
+  }} catch (err) {
     res.status(500).json({ error: err.message });
   }
 };
-
-// Cập nhật người dùng
 const updateUser = async (req, res) => {
   try {
     const { name, email, phone, avatar } = req.body;
+    if (email) {
+      const existing = await userModel.checkemailduplicate(email);
+      if (existing && existing.id !== Number(req.params.id)) {
+        return res.status(400).json({ message: "email already exists" });
+      }
+    }
+
     const updated = await userModel.updateUser(req.params.id, name, email, phone, avatar);
     if (!updated) return res.status(404).json({ message: 'User not found' });
+
     res.json(updated);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 };
 
-// Xóa người dùng
+
+
 const deleteUser = async (req, res) => {
   try {
     const result = await userModel.deleteUser(req.params.id);
     res.json(result);
+    
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 };
-
+const checkUser= async(req,res)=>{
+  try{
+    const {id} =req.params;
+      const result =await userModel.checkUser(id)
+      if(result){
+        res.status(200).json({message:"The user already exists in the database"})
+      }
+      else{
+        res.status(300).json({message:"The user is not already exists in the database"})
+      }
+  }catch(err){
+      res.status(500).json({ error: err.message });
+  }
+};
 module.exports = {
   getAllUsers,
-  getUserById,
   getUserByName,
   createUser,
   updateUser,
   deleteUser,
+  checkUser,
 };

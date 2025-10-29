@@ -90,19 +90,7 @@ npm start
 Since you're not using Postman, the recommended way to interact with the API is through the built-in interactive CLI tool.
 
 ```bash
-node src/cli.js
-```
-
-Running this command displays an interactive menu:
-
-| Option | CRUD Operation | Functionality |
-|--------|----------------|---------------|
-| 1 | Read (GET) | View all users / Search by name (optional) |
-| 2 | Read (GET) | Search for a single user by name |
-| 3 | Create (POST) | Add a new user |
-| 4 | Update (PUT) | Update user information by ID |
-| 5 | Delete (DELETE) | Delete a user by ID |
-| 0 | - | Exit the application |
+|
 
 ## 🌐 API Endpoints (For Developers)
 
@@ -110,14 +98,15 @@ For manual testing (using curl or other tools), here is the endpoint reference:
 
 **Base URL:** `http://localhost:4000/users`
 
-| Method | Endpoint | Details |
-|--------|----------|---------|
-| GET | `/users` | Get all users (can use `?name=...` for filtering) |
-| GET | `/users/search` | Get the first user matching the name (`?name=...` required) |
-| GET | `/users/:id` | Get user by ID |
-| POST | `/users` | Create new user (requires JSON body) |
-| PUT | `/users/:id` | Update user by ID (requires JSON body) |
-| DELETE | `/users/:id` | Delete user by ID |
+| Method     | Endpoint             | Description                                |
+| ---------- | -------------------- | ------------------------------------------ |
+| **GET**    | `/users`             | Get all users (use `?name=` for searching) |
+| **GET**    | `/users/:id`         | Get a user by ID                           |
+| **POST**   | `/users`             | Create a new user                          |
+| **PUT**    | `/users/:id`         | Update user by ID                          |
+| **DELETE** | `/users/:id`         | Delete user by ID                          |
+| **POST**   | `/users/check-email` | Check if an email already exists           |
+| **GET**    | `/users/check/:id`   | Check if a user ID exists in the database  |
 
 ### Request Body Example
 
@@ -130,6 +119,49 @@ For manual testing (using curl or other tools), here is the endpoint reference:
   "avatar": "https://i.pravatar.cc/150?img=1"
 }
 ```
+Thunder Client Testing
+
+You can test all routes directly from VS Code using Thunder Client (recommended).
+
+Example: Create User
+
+POST → http://localhost:4000/users
+Body (JSON):{
+  "name": "John Doe",
+  "email": "john@example.com",
+  "phone": "0912345678",
+  "avatar": "https://i.pravatar.cc/150?img=1"
+}
+Response (if success):
+
+{
+  "message": "User created successfully"
+}
+
+
+ Response (if email already exists):
+
+{
+  "message": "Email already exists"
+}
+
+
+
+Responses:
+
+{ "message": "Email already exists" }
+
+{ "message": "Email not found in the database" }
+
+Example: Check User Existence
+
+GET → http://localhost:4000/users/check/4
+
+Responses:
+
+ { "message": "The user already exists in the database" }
+
+{ "message": "The user does not exist in the database" }
 
 ## 🧹 Code Quality Management
 
@@ -206,7 +238,6 @@ Add to your VS Code settings (`.vscode/settings.json`):
 ```
 crud-basic-user-api/
 ├── src/
-│   ├── cli.js              # CLI Testing Interface
 │   ├── config/
 │   │   └── db.config.js    # DB Configuration
 │   ├── controllers/
@@ -229,6 +260,4 @@ crud-basic-user-api/
 - Unit and Integration Tests
 - API Documentation with Swagger
 
-## License
 
-MIT
