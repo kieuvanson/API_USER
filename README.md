@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 🚀 API USER: User Management Application
 
 This document guides you through the setup, development, and usage of the basic User Management API, built with Node.js, Express, and PostgreSQL.
@@ -259,5 +260,3 @@ crud-basic-user-api/
 - Add dedicated Validation Middleware for POST/PUT requests
 - Unit and Integration Tests
 - API Documentation with Swagger
-
-

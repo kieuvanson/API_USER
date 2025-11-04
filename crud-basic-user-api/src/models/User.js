@@ -1,12 +1,10 @@
-
 const pool = require('../config/db.config');
 
 const getAllUsers = async (name) => {
   if (name) {
-    const result = await pool.query(
-      'SELECT * FROM users WHERE name ILIKE $1 ORDER BY id ASC',
-      [`%${name}%`]
-    );
+    const result = await pool.query('SELECT * FROM users WHERE name ILIKE $1 ORDER BY id ASC', [
+      `%${name}%`,
+    ]);
     return result.rows;
   }
 
@@ -34,7 +32,7 @@ const createUser = async (name, email, phone, avatar) => {
 };
 const checkemailduplicate = async (email) => {
   const result = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
-  return result.rows[0]; 
+  return result.rows[0];
 };
 const updateUser = async (id, name, email, phone, avatar) => {
   const result = await pool.query(
@@ -56,5 +54,5 @@ module.exports = {
   createUser,
   updateUser,
   deleteUser,
-  checkemailduplicate
+  checkemailduplicate,
 };

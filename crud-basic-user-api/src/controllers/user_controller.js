@@ -1,6 +1,4 @@
-
 const userModel = require('../models/User');
-
 
 const getAllUsers = async (req, res) => {
   try {
@@ -11,9 +9,6 @@ const getAllUsers = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
-
-
-
 const getUserByName = async (req, res) => {
   try {
     const { name } = req.query;
@@ -28,14 +23,14 @@ const getUserByName = async (req, res) => {
 const createUser = async (req, res) => {
   try {
     const { name, email, phone, avatar } = req.body;
-    const checkemailduplicate =await userModel.checkemailduplicate(email);
-    if(checkemailduplicate){
-       return res.status(400).json({message:"email already exists"});
+    const checkemailduplicate = await userModel.checkemailduplicate(email);
+    if (checkemailduplicate) {
+      return res.status(400).json({ message: 'email already exists' });
+    } else {
+      const newUser = await userModel.createUser(name, email, phone, avatar);
+      res.status(201).json(newUser);
     }
-    else{
-    const newUser = await userModel.createUser(name, email, phone, avatar);
-    res.status(201).json(newUser);
-  }} catch (err) {
+  } catch (err) {
     res.status(500).json({ error: err.message });
   }
 };
@@ -45,7 +40,7 @@ const updateUser = async (req, res) => {
     if (email) {
       const existing = await userModel.checkemailduplicate(email);
       if (existing && existing.id !== Number(req.params.id)) {
-        return res.status(400).json({ message: "email already exists" });
+        return res.status(400).json({ message: 'email already exists' });
       }
     }
 
@@ -58,29 +53,25 @@ const updateUser = async (req, res) => {
   }
 };
 
-
-
 const deleteUser = async (req, res) => {
   try {
     const result = await userModel.deleteUser(req.params.id);
     res.json(result);
-    
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 };
-const checkUser= async(req,res)=>{
-  try{
-    const {id} =req.params;
-      const result =await userModel.checkUser(id)
-      if(result){
-        res.status(200).json({message:"The user already exists in the database"})
-      }
-      else{
-        res.status(300).json({message:"The user is not already exists in the database"})
-      }
-  }catch(err){
-      res.status(500).json({ error: err.message });
+const checkUser = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const result = await userModel.checkUser(id);
+    if (result) {
+      res.status(200).json({ message: 'The user already exists in the database' });
+    } else {
+      res.status(300).json({ message: 'The user is not already exists in the database' });
+    }
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
 };
 module.exports = {

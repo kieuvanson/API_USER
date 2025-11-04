@@ -8,12 +8,12 @@ API USER is a RESTful backend service providing CRUD (Create, Read, Update, Dele
 
 ### Tech Stack
 
-| Category | Technology | Purpose |
-|----------|------------|---------|
-| Backend Core | Node.js, Express | Server Environment and Framework |
-| Database | PostgreSQL | Robust Relational Database |
-| Interface | CLI & Axios | Interactive Command-Line Interface for testing |
-| Quality | ESLint, Prettier, Nodemon | Ensures clean, consistent formatting, and automatic server reload |
+| Category     | Technology                | Purpose                                                           |
+| ------------ | ------------------------- | ----------------------------------------------------------------- |
+| Backend Core | Node.js, Express          | Server Environment and Framework                                  |
+| Database     | PostgreSQL                | Robust Relational Database                                        |
+| Interface    | CLI & Axios               | Interactive Command-Line Interface for testing                    |
+| Quality      | ESLint, Prettier, Nodemon | Ensures clean, consistent formatting, and automatic server reload |
 
 ### Highlights
 
@@ -89,7 +89,7 @@ npm start
 
 Since you're not using Postman, the recommended way to interact with the API is through the built-in interactive CLI tool.
 
-```bash
+````bash
 |
 
 ## 🌐 API Endpoints (For Developers)
@@ -118,7 +118,8 @@ For manual testing (using curl or other tools), here is the endpoint reference:
   "phone": "0901234567",
   "avatar": "https://i.pravatar.cc/150?img=1"
 }
-```
+````
+
 Thunder Client Testing
 
 You can test all routes directly from VS Code using Thunder Client (recommended).
@@ -127,25 +128,22 @@ Example: Create User
 
 POST → http://localhost:4000/users
 Body (JSON):{
-  "name": "John Doe",
-  "email": "john@example.com",
-  "phone": "0912345678",
-  "avatar": "https://i.pravatar.cc/150?img=1"
+"name": "John Doe",
+"email": "john@example.com",
+"phone": "0912345678",
+"avatar": "https://i.pravatar.cc/150?img=1"
 }
 Response (if success):
 
 {
-  "message": "User created successfully"
+"message": "User created successfully"
 }
 
-
- Response (if email already exists):
+Response (if email already exists):
 
 {
-  "message": "Email already exists"
+"message": "Email already exists"
 }
-
-
 
 Responses:
 
@@ -159,7 +157,7 @@ GET → http://localhost:4000/users/check/4
 
 Responses:
 
- { "message": "The user already exists in the database" }
+{ "message": "The user already exists in the database" }
 
 { "message": "The user does not exist in the database" }
 
@@ -180,6 +178,7 @@ npm run lint:fix
 ```
 
 **What it does:**
+
 - Finds syntax errors and code problems
 - Enforces consistent coding style
 - Catches potential bugs before runtime
@@ -198,6 +197,7 @@ npm run format:check
 ```
 
 **What it does:**
+
 - Automatically formats code (indentation, spacing, quotes, etc.)
 - Enforces consistent code style across all files
 - Makes code more readable
@@ -223,6 +223,7 @@ If you're using VS Code, install these extensions for automatic formatting:
 - **Prettier Extension** - Auto-formats on save
 
 Add to your VS Code settings (`.vscode/settings.json`):
+
 ```json
 {
   "editor.formatOnSave": true,
@@ -259,5 +260,3 @@ crud-basic-user-api/
 - Add dedicated Validation Middleware for POST/PUT requests
 - Unit and Integration Tests
 - API Documentation with Swagger
-
-
