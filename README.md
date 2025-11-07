@@ -134,7 +134,4 @@ All endpoints are prefixed with `/product`.
 - Sequelize
 - CORS
 - dotenv
-<<<<<<< HEAD
-=======
 
->>>>>>> 1df2dbe26a889fb61fe013862a1ac9c68847c6fe
