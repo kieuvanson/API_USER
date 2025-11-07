@@ -1,4 +1,4 @@
-import { Get_products, Put_product, Post_product, Delete_product } from "../model/product_model.js";
+import { Get_products, Put_product, Post_product, Delete_product,checkCodeduplicate } from "../model/product_model.js";
 export const get_products = async (req, res) => {
   try {
     const products = await Get_products();
@@ -16,6 +16,10 @@ export const put_prodcuct = async (req, res) => {
     const { code, name, price, amount, attributes } = req.body;
     if (!code || !name || !price || !amount || !attributes) {
       return res.status(400).json({ message: "please fill in all the information" });
+    }
+    const checkcode= await checkCodeduplicate(code);
+    if(checkcode){
+      return res.status(400).json({message:"This code already exists"})
     }
     const put_prodcuct = await Put_product(req.params.id, {
       code,
