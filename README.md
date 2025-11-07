@@ -31,9 +31,9 @@ This is a Node.js REST API for managing products. It provides CRUD operations (C
    ```
 
 3. Set up environment variables:
-<<<<<<< HEAD
+ HEAD
    Create a `.env` file in the root directory with the following variables (make sure `.env` is added to `.gitignore` to avoid committing sensitive data):
-=======
+
    Create a `.env` file in the root directory with the following variables:
 >>>>>>> 1df2dbe26a889fb61fe013862a1ac9c68847c6fe
 
@@ -68,7 +68,6 @@ This is a Node.js REST API for managing products. It provides CRUD operations (C
        new_data JSONB,
        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
      );
-     ```
 
 ## Usage
 
@@ -134,4 +133,5 @@ All endpoints are prefixed with `/product`.
 - Sequelize
 - CORS
 - dotenv
-
+  
+______________________________________
